@@ -1,0 +1,56 @@
+mysql> SHOW DATABASES \g
++--------------------+
+| Database           |
++--------------------+
+| example            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| shop               |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE DATABASE sample \g
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SHOW TABLES FROM sample \g
+Empty set (0.01 sec)
+
+mysql> \q
+Bye
+user@uservm:~$ mysqldump example > example.sql
+user@uservm:~$ ls
+Desktop    Downloads    Music     Public    snap       Videos
+Documents  example.sql  Pictures  shop.sql  Templates
+user@uservm:~$ tail -10 example.sql
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-03-09 11:29:25
+user@uservm:~$ mysql sample < example.sql
+user@uservm:~$ mysql
+mysql> SHOW TABLES FROM sample \g
++------------------+
+| Tables_in_sample |
++------------------+
+| users            |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> DESCRIBE sample.users \g
++-------+-----------+------+-----+---------+-------+
+| Field | Type      | Null | Key | Default | Extra |
++-------+-----------+------+-----+---------+-------+
+| id    | int       | YES  |     | NULL    |       |
+| name  | char(255) | YES  |     | NULL    |       |
++-------+-----------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>
