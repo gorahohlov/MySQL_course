@@ -1,0 +1,14 @@
+SELECT count(*) FROM likes WHERE target_type_id=2 AND target_id IN (SELECT * FROM (SELECT user_id FROM profiles ORDER BY birthday DESC LIMIT 10) AS sorted_profiles);
+
+вопрос для чего нам потербовалось в этом запросе внутри конструкции IN 
+указывать 2 раза Select 
+
+первый раз
+(SELECT user_id FROM profiles ORDER BY birthday DESC LIMIT 10)
+
+второй раз вложенный в (Select * FROM (<Select ...>) as sorted_profiles)
+SELECT * FROM (SELECT user_id FROM profiles ORDER BY birthday DESC LIMIT 10) AS sorted_profiles
+
+по-сути ведь оба запроса SELECT выдают одинаковый набор данных
+
+для того чтобы поименовать "AS sorted_profiles"?
